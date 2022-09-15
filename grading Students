@@ -1,0 +1,12 @@
+def gradingStudents(grades):
+    list=[]
+    for i in range(len(grades)):
+        if grades[i]<38:
+            list.append(grades[i])
+        else:
+            mod= grades[i]%5
+            if mod>2:
+                grades[i]+=(5-mod)
+                list.append(grades[i])
+            else:
+                list.append(grades[i])
