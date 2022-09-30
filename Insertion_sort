@@ -1,0 +1,11 @@
+def insertionSort1(n, arr):
+    last=arr.pop()
+    for i in range(n-2,-1,-1):
+        if arr[i]<=last:
+           arr.insert(i+1,last)
+           print(*arr, sep=" ")
+           break
+        else:
+          arr.insert(i,arr[i])
+          print(*arr, sep=" ")
+          arr.remove(arr[i])    
