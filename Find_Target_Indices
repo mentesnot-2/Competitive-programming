@@ -1,0 +1,18 @@
+class Solution(object):
+    def targetIndices(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        for i in range(len(nums)):
+            for j in range(len(nums)):
+                if nums[j]>nums[i]:
+                    temp=nums[i]
+                    nums[i]=nums[j]
+                    nums[j]=temp
+        lst=[]
+        for k in range(len(nums)):
+            if nums[k]==target:
+                lst.append(k)
+        return lst
