@@ -14,3 +14,14 @@ class Solution:
         for i in range(len(stack)):
             result=stack.pop() + result
         return result
+        
+     # another optimal answer for the question without using space twice(#result and stack on the first one)
+ class Solution:
+    def removeDuplicates(self, s: str) -> str:
+        stack=[]
+        for i in s:
+            if stack and stack[-1]==i:
+                stack.pop()
+            else:
+                stack.append(i)
+        return "".join(stack)
