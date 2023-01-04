@@ -1,11 +1,10 @@
 class Solution:
     def divisorSubstrings(self, num: int, k: int) -> int:
         s=str(num)
-        l=len(s)
         count=0
-        for i in range(l):
-            if i+k<=l:
-                window=int(s[i:i+k])
-                if window!=0 and int(s)%window==0:
-                    count+=1
+        if k == 1: return len([i for i in s if i != "0" and num % int(i) == 0])
+        for i in range(len(s)-k+1):
+                if  int(s[i:i+k])!=0:
+                    if int(s)% int(s[i:i+k])==0:
+                        count+=1
         return count
