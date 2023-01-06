@@ -1,4 +1,21 @@
 class Solution:
     def maxProductDifference(self, nums: List[int]) -> int:
-        nums.sort()
-        return (nums[len(nums)-1]*nums[len(nums)-2])-(nums[0]*nums[1])
+        first=0
+        second=0
+        for num in nums:
+            if num>first:
+                second=first
+                first=num
+            elif num>second:
+                second=num
+        pro=first*second
+        first=float("inf")
+        second=float("inf")
+        for num in nums:
+            if num<first:
+                second=first
+                first=num
+            elif num<second:
+                second=num
+        pro1=first*second
+        return pro-pro1
