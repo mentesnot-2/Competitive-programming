@@ -4,7 +4,7 @@ class Solution:
         for i in range(len(arr)-1):
             if indx<=i:
                 flag=arr[i+1]
-                for j in range(i+1,len(arr)):
+                for j in range(i+2,len(arr)):
                     if arr[j]>flag:
                         flag=arr[j]
                         indx=j
@@ -13,4 +13,3 @@ class Solution:
                 arr[i]=arr[indx]
         arr[-1]=-1
         return arr
-                    
