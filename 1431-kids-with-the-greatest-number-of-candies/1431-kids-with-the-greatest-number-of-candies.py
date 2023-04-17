@@ -4,11 +4,10 @@ class Solution:
         for i in range(1,len(candies)):
             if candies[i]>val:
                 val=candies[i]
-        lst=[]
         for i in range(len(candies)):
             if candies[i]+extraCandies>=val:
-                lst.append(True)
+                candies[i]=True
             else:
-                lst.append(False)
-        return lst
+                candies[i]=False
+        return candies
         
