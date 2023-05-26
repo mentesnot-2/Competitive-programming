@@ -10,8 +10,8 @@ class Solution:
         while temp is not None:
             temp=temp.next
             length+=1
-        if length==1:
-            head=None
+        # if length==1:
+        #     head=None
         if length==n:
             head=current.next
         target=0
