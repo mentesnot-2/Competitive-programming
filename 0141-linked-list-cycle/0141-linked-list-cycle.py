@@ -6,11 +6,22 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        slwptr,fstptr=head,head
-        while fstptr and fstptr.next:
-            slwptr=slwptr.next
-            fstptr=fstptr.next.next
-            if slwptr==fstptr:
+        val=set()
+        cur=head
+        while cur:
+            if cur in val:
                 return True
-        return False
+            else:
+                val.add(cur)
+            cur=cur.next
+        
+        
+        
+        # slwptr,fstptr=head,head
+        # while fstptr and fstptr.next:
+        #     slwptr=slwptr.next
+        #     fstptr=fstptr.next.next
+        #     if slwptr==fstptr:
+        #         return True
+        # return False
         
