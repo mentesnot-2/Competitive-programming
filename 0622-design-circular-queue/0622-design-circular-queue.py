@@ -1,45 +1,41 @@
+class ListNode:
+    def __init__(self, val: int, nxt: ListNode = None):
+        self.val = val
+        self.next = nxt
+
 class MyCircularQueue:
 
     def __init__(self, k: int):
         self.capacity = k
         self.size = 0
-        self.data = [0 for _ in range(k)]
-        self.left, self.right = 0, -1
+        self.head = None
+        self.tail = None
+        
 
 
     def enQueue(self, value: int) -> bool:
         if self.isFull():   return False
-        
-        self.right += 1
-        self.right %= self.capacity
-        self.data[self.right] = value
-        self.size += 1
-
+        newNode = ListNode(value)
+        if self.isEmpty():
+            self.head = self.tail = newNode
+        else:
+            self.tail.next = newNode
+            self.tail = self.tail.next
+        self.size+=1
         return True
-        
-
     def deQueue(self) -> bool:
         if self.isEmpty():  return False
-
-        self.left += 1
-        self.left %= self.capacity
-        self.size -= 1
-
+        self.head = self.head.next
+        self.size-=1
         return True
-        
-
+    
+    
     def Front(self) -> int:
-        if self.isEmpty():  return -1
-
-        return self.data[self.left]
+        return -1 if self.isEmpty() else self.head.val
         
-
     def Rear(self) -> int:
-        if self.isEmpty():  return -1
 
-        return self.data[self.right]
-        
-
+        return -1 if self.isEmpty() else self.tail.val
     def isEmpty(self) -> bool:
         return self.size == 0
         
