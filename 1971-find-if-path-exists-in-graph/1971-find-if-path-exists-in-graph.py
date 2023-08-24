@@ -1,21 +1,23 @@
-import collections
-
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        graph = collections.defaultdict(list)
-        for a, b in edges:
+        graph = {}
+        for a,b in edges:
+            if a not in graph:
+                graph[a] = []
+            if b not in graph:
+                graph[b] = []
+                
             graph[a].append(b)
             graph[b].append(a)
-            
-        def dfs(curr_node, seen):
-            if curr_node == destination:
+        def dfs(source,visited):
+            if source == destination:
                 return True
-            if not seen[curr_node]:
-                seen[curr_node] = True
-                for next_node in graph[curr_node]:
-                    if dfs(next_node, seen):
-                        return True
+            visited.add(source)
+            for node in graph[source]:
+                if node not in visited:
+                    found = dfs(node,visited)
+                    if found:
+                        return found
             return False
-            
-        seen = [False] * n
-        return dfs(source, seen)
+        visited = set()
+        return dfs(source,visited)
