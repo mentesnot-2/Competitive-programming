@@ -23,5 +23,8 @@ class Solution:
                 cur = cur.next
             rm-= (1 if rm else 0)
             if cur:
-                cur.next,cur = None,cur.next
+                temp = cur.next
+                cur.next = None
+                cur = temp
+                # cur.next,cur = None,cur.next
         return res
