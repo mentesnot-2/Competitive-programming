@@ -1,24 +1,28 @@
 class Solution:
     def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
-        i,j = 0,len(costs) - 1
-        ans = 0
+        
+        head_workers = costs[:candidates]
+        tail_workers = costs[max(candidates, len(costs) - candidates):]
+        heapify(head_workers)
+        heapify(tail_workers)
+        
+        answer = 0
+        next_head, next_tail = candidates, len(costs) - 1 - candidates 
 
-        minHeapL = []
-        minHeapR = []
+        for _ in range(k): 
+            if not tail_workers or head_workers and head_workers[0] <= tail_workers[0]: 
+                answer += heappop(head_workers)
 
-        for _ in range(k):
-            while len(minHeapL) < candidates and i <= j:
-                heapq.heappush(minHeapL,costs[i])
-                i+=1
-            while len(minHeapR) < candidates and i <= j:
-                heapq.heappush(minHeapR,costs[j])
-                j-=1
-            if not minHeapL:
-                ans+=heapq.heappop(minHeapR)
-            elif not minHeapR:
-                ans+=heapq.heappop(minHeapL)
-            elif minHeapL[0] <= minHeapR[0]:
-                ans+=heapq.heappop(minHeapL)
-            else:
-                ans+=heapq.heappop(minHeapR)
-        return ans
+               
+                if next_head <= next_tail: 
+                    heappush(head_workers, costs[next_head])
+                    next_head += 1
+            else: 
+                answer += heappop(tail_workers)
+
+                
+                if next_head <= next_tail:  
+                    heappush(tail_workers, costs[next_tail])
+                    next_tail -= 1
+                    
+        return answer
