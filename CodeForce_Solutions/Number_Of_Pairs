@@ -1,0 +1,32 @@
+from bisect import bisect_left, bisect_right
+
+def count_pairs_in_range(arr, l, r):
+    arr.sort()
+    n = len(arr)
+    count = 0
+
+    for i in range(n):
+       
+        right_idx = bisect_right(arr, r - arr[i])
+
+        
+        left_idx = bisect_left(arr, l - arr[i])
+
+        
+        count += max(0, right_idx - left_idx)
+
+       
+        if l <= 2 * arr[i] <= r:
+            count -= 1
+
+    
+    return count // 2
+
+t = int(input())
+
+for _ in range(t):
+    n, l, r = map(int, input().split())
+    a = list(map(int, input().split()))
+
+    result = count_pairs_in_range(a, l, r)
+    print(result)
